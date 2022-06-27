@@ -1,0 +1,223 @@
+.header {
+	$self: &;
+	box-sizing: border-box;
+	position: fixed;
+	z-index: 3;
+	width: 100%;
+	transition: background-color 0.3s;
+	background-color: #fff;
+
+	&_home {
+		box-shadow: none;
+		background-image: none;
+
+		#{$self}__logo {
+			background-color: transparent;
+		}
+	}
+
+	&_filled#{&}_home {
+		background-color: rgba(#fff, 0.95);
+		box-shadow: 0 4px 60px rgba(0, 0, 0, 0.2);
+	}
+
+	&__inner {
+		display: flex;
+		min-height: 80px;
+		align-items: center;
+		transition: height 0.3s;
+		flex-wrap: wrap;
+
+		@include media('<lg') {
+			min-height: 60px;
+			padding: 12px;
+
+			& > .button {
+				height: 34px;
+				padding: 0 10px;
+				font-size: 12px;
+			}
+		}
+	}
+
+	&__logo {
+		box-sizing: border-box;
+		height: 100%;
+		display: flex;
+		align-items: center;
+		flex-shrink: 0;
+
+		&__link {
+
+			img {
+				width: 85px;
+				transition: filter 0.3s;
+
+				&:hover {
+					filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.75));
+				}
+			}
+			@include media('>=lg') {
+				margin-right: 32px;
+			}
+		}
+
+		&__body a {
+			display: block;
+			font-weight: 400;
+			font-size: 16px;
+			line-height: 18px;
+			text-transform: uppercase;
+			color: $primaryColor;
+			margin-bottom: 7px;
+			text-decoration: none;
+			&:last-child {
+				margin-bottom: 0;
+			}
+		}
+
+		@include media("<sm") {
+			order: 1;
+			margin-right: auto;
+			img {
+				height: 30px;
+			}
+		}
+		@include media('>=sm', '<lg') {
+			margin-right: auto;
+			margin-left: auto;
+
+			img {
+				height: 30px;
+			}
+		}
+	}
+
+	&__nav {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		margin: 0 auto 0 auto;
+		gap: 20px;
+
+		&__item {
+			&__link {
+				font-weight: 400;
+				font-size: 16px;
+				line-height: 18px;
+				text-transform: uppercase;
+				color: $blackColor;
+				text-decoration: none;
+
+				&:hover {
+					color: $primaryColor;
+				}
+
+				&--dropdown-toggle {
+
+					position: relative;
+					padding-right: 13px;
+					background: url('#{$images-path}icons-sprite.svg#icon-arr-down-view-black') center right / 10px 10px no-repeat;
+				}
+			}
+		}
+
+		@include media("<=lg") {
+			font-size: 14px;
+			margin-right: 10px;
+		}
+	}
+
+	&__menu-toggle {
+		display: inline-flex;
+		width: 45px;
+		height: 45px;
+		background-image: url(#{$images-path}icons-sprite.svg#icon-menu-view-primary);
+		background-position: center left;
+		background-repeat: no-repeat;
+		background-size: 20px 15px;
+
+
+		@include media("<sm") {
+			order: 2;
+			background-position-x: right;
+		}
+		@include media("<lg") {
+			height: 34px;
+			width: 34px;
+		}
+	}
+
+	@include media("<lg") {
+		&__menu-blind {
+			box-sizing: border-box;
+			display: flex;
+			flex-flow: column nowrap;
+			position: fixed;
+			z-index: 4;
+			top: -100vh;
+			right: 0;
+			max-height: 100vh;
+			width: 100% ;
+			background: #fff;
+			transition: top 0.4s ease-out;
+			overflow: auto;
+			padding: 15px 20px 20px;
+
+			&__header {
+				display: flex;
+				justify-content: space-between;
+				height: 60px;
+				align-items: center;
+			}
+			&__logo img {
+				height: 30px;
+			}
+			&__cross {
+				display: inline-block;
+				width: 30px;
+				height: 30px;
+				cursor: pointer;
+				background-image: url("data:image/svg+xml,%3Csvg width='28' height='28' viewBox='0 0 28 28' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cline x1='7.00789' y1='6.99208' x2='21.0079' y2='20.9921' stroke='%23355CE0' stroke-width='2'/%3E%3Cline x1='21.0064' y1='7.00642' x2='7.00642' y2='21.0064' stroke='%23355CE0' stroke-width='2'/%3E%3C/svg%3E%0A");
+				background-position: center;
+				background-repeat: no-repeat;
+			}
+			&__footer {
+				text-align: center;
+				&__phones {
+					margin-bottom: 20px;
+				}
+			}
+			.header__nav {
+				flex-direction: column;
+				margin: 0 auto 20px;
+				gap: 2px;
+				text-align: center;
+				&__item__link {
+					font-size: 14px;
+				}
+			}
+			&.opened {
+				top: 0;
+			}
+
+
+			@include media("<lg") {
+				.dropdown-menu {
+					position: static!important;
+					transform: none!important;
+					margin-bottom: 10px!important;
+					box-shadow: none!important;
+					text-align: center;
+					padding: 5px 0 0;
+				}
+			}
+		}
+	}
+	@include media(">=lg") {
+		&__menu-blind {
+			display: flex;
+			margin: 0 auto;
+		}
+	}
+}

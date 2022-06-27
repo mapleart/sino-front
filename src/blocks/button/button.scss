@@ -1,0 +1,59 @@
+.button {
+	$self: &;
+	@extend %reset-button;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	background-color: $primaryColor;
+	border: 1px solid $primaryColor;
+	height: 50px;
+	color: #fff;
+	text-decoration: none;
+	font-weight: 400;
+	font-size: 16px;
+	line-height: 18px;
+	text-transform: uppercase;
+	text-align: center;
+	padding: 0 16px;
+	letter-spacing: 0.05em;
+	transition: background-color 0.3s, color 0.3s;
+	border-radius: 5px;
+
+	&:hover {
+		background-color: #fff;
+		color: $primaryColor;
+	}
+
+	&:disabled,
+	&.disabled {
+		cursor: default!important;
+		border-color: $secondaryColor!important;
+		background-color: $secondaryColor!important;
+		color: $blackColor!important;
+	}
+
+	&--secondary {
+		border-color: $secondaryColor;
+		background-color: $secondaryColor;
+		color: $blackColor;
+	}
+
+	&--sm {
+		height: 46px;
+		font-size: 12px;
+	}
+
+
+	@include media('<lg') {
+		height: 46px;
+
+	}
+	@include media('<sm') {
+		height: 40px;
+		display: flex;
+		padding: 0 10px;
+		font-size: 12px;
+	}
+
+
+}

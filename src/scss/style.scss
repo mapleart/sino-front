@@ -1,0 +1,97 @@
+@import "lib/additional.scss"; 
+@include reset();
+*, ::after, ::before {
+	box-sizing: border-box;
+}
+// Include breakpoints badge
+// body { @include screen-media(); }
+
+// Import media-query helper
+@import "../../node_modules/include-media/dist/_include-media.scss";
+
+
+$breakpoints: (
+	'xs': 0,
+	'sm': 640px,
+	'md': 768px,
+	'lg': 992px,
+ 	'xl': 1200px,
+	'xxl': 1500px
+);
+
+// Import animate-scss
+@import
+	"../../node_modules/animate-scss/_properties.scss",
+	// "../../node_modules/animate-scss/_attention-seekers/attention-seekers.scss",
+	// "../../node_modules/animate-scss/_bouncing-entrances/bouncing-entrances.scss",
+	// "../../node_modules/animate-scss/_bouncing-exits/bouncing-exits.scss",
+	// "../../node_modules/animate-scss/_fading-entrances/fading-entrances.scss",
+	// "../../node_modules/animate-scss/_fading-exits/fading-exits.scss",
+	// "../../node_modules/animate-scss/_flippers/flippers.scss",
+	// "../../node_modules/animate-scss/_lightspeed/lightspeed.scss",
+	// "../../node_modules/animate-scss/_rotating-entrances/rotating-entrances.scss",
+	// "../../node_modules/animate-scss/_rotating-exits/rotating-exits.scss",
+	"../../node_modules/animate-scss/_sliding-entrances/sliding-entrances.scss";
+	// "../../node_modules/animate-scss/_sliding-exits/sliding-exits.scss",
+	// "../../node_modules/animate-scss/_specials/specials.scss",
+	// "../../node_modules/animate-scss/_zooming-exits/zooming-exits.scss",
+	// "../../node_modules/animate-scss/_zooming-entrances/zooming-entrances.scss";
+
+
+
+@import "../../node_modules/swiper/swiper";
+
+// Import BEM blocks scss
+@import "../blocks/**/*.scss";
+
+body, html {
+	box-sizing: border-box;
+	font-size: #{$basesize}px;
+	line-height: 130%;
+	font-family: 'Ubuntu', sans-serif;
+	color: $blackColor;
+	font-weight: 400;
+	// background-color: #fafafa;
+	min-height: 100vh;
+	display: flex;
+	flex-flow: column nowrap;
+}
+h1, h2, h3, h4, h5 {
+	line-height: 130%;
+}
+.mb-5 {
+	margin-bottom: 5px!important;
+}
+.mb-20 {
+	margin-bottom: 20px!important;
+}
+@include media('<sm') {
+	.mb-xs-0 {
+		margin-bottom: 0!important;
+	}
+	.mb-xs-20 {
+		margin-bottom: 20px!important;
+	}
+	.mb-xs-60 {
+		margin-bottom: 60px!important;
+	}
+}
+.text-center {
+	text-align: center!important;
+}
+.main {
+	padding-top: 80px;
+	@include media('<lg') {
+		padding-top: 60px;
+	}
+}
+// .main { flex: 1 0 auto; }
+.footer { 
+	flex: 0 0 auto; 
+	margin-top: auto; 
+}
+
+p { margin-bottom: 10px; }
+strong { font-weight: bold; }
+em { font-style: italic; }
+#mask-1, #mask-2 { width: 0; height: 0; }

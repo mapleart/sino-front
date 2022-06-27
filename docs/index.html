@@ -1,0 +1,373 @@
+<!DOCTYPE html> 
+<html lang="ru"> 
+<head> 
+	<meta charset="UTF-8"> 
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<link rel="shortcut icon" href="images/favicon.ico">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+	<link rel="stylesheet" href="style.css"> 
+	<title></title> 
+</head> 
+<body class="body-home">
+<svg id="mask-1" width="0" height="0" viewBox="0 0 824 724"><clipPath id="hexagonClipPath" clipPathUnits="objectBoundingBox" transform="scale(0.0012, 0.00138)"><path d="M226.525 0.672501C212.235 0.672501 199.03 8.29646 191.884 20.6725L6.30594 342.104C-0.839373 354.48 -0.839369 369.728 6.30594 382.104L191.884 703.535C199.03 715.911 212.235 723.535 226.525 723.535L597.682 723.535C611.973 723.535 625.178 715.911 632.323 703.535L817.902 382.104C825.047 369.728 825.047 354.48 817.902 342.104L632.323 20.6725C625.178 8.29645 611.973 0.672501 597.682 0.672501L226.525 0.672501Z" fill="none"/></clipPath></svg>
+<svg id="mask-2" width="0" height="0" viewBox="0 0 263 301"><clipPath id="hexClipPath" clipPathUnits="objectBoundingBox" transform="scale(0.0038, 0.00332)"><path d="M115.97 4.78856C125.33 -0.74153 136.862 -0.74153 146.223 4.78855L246.97 64.3096C256.33 69.8397 262.096 80.0597 262.096 91.1199V210.162C262.096 221.222 256.33 231.442 246.97 236.972L146.223 296.493C136.862 302.024 125.33 302.024 115.97 296.493L15.2228 236.972C5.86241 231.442 0.0961914 221.222 0.0961914 210.162V91.1199C0.0961914 80.0597 5.86241 69.8397 15.2228 64.3096L115.97 4.78856Z" fill="none"/></clipPath></svg>
+
+
+
+
+<div class="section section--quiz">
+    <div class="container">
+        <div class="section--quiz__row row">
+            <div class="col-12 col-sm-6 col-lg-5">
+                <div class="section--quiz__title section__title">
+                    Пройдите небольшой тест и получите скидку
+                </div>
+            </div>
+            <div class="col-12 col-sm-5 offset-lg-1 col-lg-4">
+                <div class="section__note">
+                    Для того, чтобы нам профессионально развиваться и улучшать качество нашей работы, нам необходимо иметь от вас обратную связь. За каждый ответ на вопрос, ваша скидка увеличивается на 3%.
+                </div>
+            </div>
+        </div>
+
+        <div class="quiz" id="main_quiz" v-cloak>
+            <div class="quiz__progress">
+                <div class="quiz__progress__track" :style="trackStyle"></div>
+                    <div class="quiz__progress__discount" v-if="discount > 0">Скидка {{ discount }}%</div>
+            </div>
+            <div class="quiz__title">
+                {{ quiz.questions[questionIndex].text }}
+            </div>
+
+            <div class="quiz__inputs">
+                <div class="quiz__inputs__inner">
+                    <div class="f-group mb-5" v-for="(response, index) in quiz.questions[questionIndex].responses" :key="index">
+                        <div class="f-check" @click="selectOption(index)">
+                            <input class="f-check-input" type="radio" :name="'questionInput'+questionIndex+'-'+ index" :id="'questionInput'+questionIndex+'-'+ index" :checked="userResponses[questionIndex] == index" >
+                            <label class="f-check-label" :for="'questionInput'+questionIndex+'-'+ index">
+                                {{ response.text }}
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="quiz__footer">
+                <button class="button button--secondary" v-on:click="prev();" :disabled="questionIndex < 1" v-if="questionIndex >= 1">
+                    Назад
+                </button>
+
+                <button class="button quiz__footer__next" v-on:click="next();" :disabled="(userResponses[questionIndex]==null)">
+                    {{ questionIndex>=maxIndex ? 'Зафиксировать скидку' : 'Далее' }}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="section section--video">
+    <div class="container">
+        <div class="section--video__row row">
+            <div class="col-12 col-sm-8 col-lg-5">
+                <div class="section--video__title section__title">
+                    Узнайте об облачной переводческой системе
+                </div>
+            </div>
+            <div class="col-12 col-sm-4 offset-lg-1 col-lg-4 section--video__desc" >
+                <div class="section__note">
+                    с возможностью онлайн-просмотра хода работы
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container container--sm-wide">
+        <div class="video-preview block-wide-mobile ">
+        </div>
+    </div>
+    <div class="container">
+        <a href="#" class="button">Хочу попробовать</a>
+    </div>
+</div>
+
+<div class="section section--tariff">
+    <div class="container">
+        <div class="section--tariff__header">
+
+            <div class="section--video__title section__title">
+                Популярные тарифы
+            </div>
+            <div class="partner-slider__nav d-none d-sm-inline-flex d-lg-none">
+                <div class="partner-slider__nav__item partner-slider__nav__item--prev js-tariff-prev"><svg width="18" height="32" viewBox="0 0 18 32" fill="none" stroke="#050F32" xmlns="http://www.w3.org/2000/svg"><path d="M17 1L2 16L17 31" stroke-width="2"/></svg></div>
+                <div class="partner-slider__nav__item partner-slider__nav__item--next js-tariff-next"><svg width="18" height="32" viewBox="0 0 18 32" fill="none" stroke="#050F32" xmlns="http://www.w3.org/2000/svg"><path d="M1 1L16 16L1 31"  stroke-width="2"/></svg></div>
+            </div>
+        </div>
+        <div class="section__desc">
+            Примерная стоимость перевода без скидок
+        </div>
+
+        <div class="tariff__slider swiper">
+            <div class="swiper-wrapper swiper-wrapper--lg-flex">
+                <div class="tariff swiper-slide">
+                    <div class="tariff__name">Тариф «Мини»</div>
+                    <div class="tariff__price">
+                        от 250 ₽ за страницу
+                    </div>
+                    <div class="tariff__list-note">
+                        Вы получите:
+                    </div>
+                    <div class="tariff__list check-list">
+                        <div>понятный и удобный для чтения текст</div>
+                    </div>
+                    <div>
+                        <a class="tariff__link" href="#">Подробнее</a>
+                    </div>
+                </div>
+                <div class="tariff swiper-slide">
+                    <div class="tariff__name">Тариф «Стандарт»</div>
+                    <div class="tariff__price">
+                        от 450 ₽ за страницу
+                    </div>
+                    <div class="tariff__list-note">
+                        Вы получите:
+                    </div>
+                    <div class="tariff__list check-list">
+                        <div>перевод, который можно
+                            публиковать, предоставлять
+                            клиентам и партнерам</div>
+                    </div>
+                    <div>
+                        <a class="tariff__link" href="#">Подробнее</a>
+                    </div>
+                </div>
+                <div class="tariff swiper-slide">
+                    <div class="tariff__name">Тариф «Бизнес»</div>
+                    <div class="tariff__price">
+                        до 650 ₽ за страницу
+                    </div>
+                    <div class="tariff__list-note">
+                        Вы получите:
+                    </div>
+                    <div class="tariff__list check-list">
+                        <div>готовые маркетинговые
+                            материалы, адаптированные под
+                            целевой зарубежный рынок</div>
+                    </div>
+                    <div>
+                        <a class="tariff__link" href="#">Подробнее</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="section section--corporate">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-lg-6">
+                <div class="row">
+                    <div class="col-12 col-sm-8 col-lg-12">
+                        <div class="section--corporate__title section__title">
+                            Корпоративным клиентам
+                        </div>
+                        <div class="section__desc">
+                            Если у вас сразу несколько документов, мы
+                            поможем вам сэкономить на переводе и
+                            получить необходимое качество.
+                        </div>
+
+
+                        <div class="corporate__list check-list">
+                            <div>Возможность выбрать переводчика</div>
+                            <div>Выбор тарифа по бюджету и требованиям</div>
+                            <div>Безналичный расчёт и закрывающие документы</div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-4 col-lg-12 align-self-center">
+                        <div class="download-btn d-none d-sm-block">
+                            <a href="#" class="download-btn__link"><span>Скачать чек-лист</span></a>
+                            <div class="download-btn__note">
+                                Как выбрать бюро переводов под свои требования
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-lg-6">
+                <div class="m-form">
+                    <div class="m-form__body">
+                        <div class="m-form__title">Рассчитать стоимость перевода на индивидуальных условиях</div>
+                        <div class="m-form__desc">Мы свяжемся с вами в течение 5 минут, уточним сроки и стоимость</div>
+                        <form>
+
+                            <div class="f-group mb-2">
+                                <div class="f-floating mb-3">
+                                    <input type="text" class="f-control" id="corporateFormName" placeholder="Как к вам обратиться?">
+                                    <label for="priceFormName">Как к вам обратиться?</label>
+                                </div>
+                            </div>
+                            <div class="f-group mb-20">
+                                <div class="f-floating mb-3">
+                                    <input type="text" class="f-control" id="corporateFormContact" placeholder="E-mail или телефон">
+                                    <label for="priceFormContact">E-mail или телефон</label>
+                                </div>
+                            </div>
+
+                            <div class="text-center mb-20">
+                                <button type="submit" class="button">Заказать обратную связь</button>
+                            </div>
+
+                            <div class="f-check">
+                                <input class="f-check-input" type="checkbox" value="" id="corporateFormLicense">
+                                <label class="f-check-label" for="corporateFormLicense">
+                                    Согласен с <a href="#">политикой конфиденциальности</a>
+                                </label>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="section section--partners">
+    <div class="container">
+        <div class="section--partners__header d-flex justify-content-between align-items-center">
+            <div class="section--partners__title section__title">
+                Наши клиенты и партнёры
+            </div>
+
+            <div class="partner-slider__nav d-none d-sm-inline-flex">
+                <div class="partner-slider__nav__item partner-slider__nav__item--prev js-partner-prev"><svg width="18" height="32" viewBox="0 0 18 32" fill="none" stroke="#050F32" xmlns="http://www.w3.org/2000/svg"><path d="M17 1L2 16L17 31" stroke-width="2"/></svg></div>
+                <div class="partner-slider__nav__item partner-slider__nav__item--next js-partner-next"><svg width="18" height="32" viewBox="0 0 18 32" fill="none" stroke="#050F32" xmlns="http://www.w3.org/2000/svg"><path d="M1 1L16 16L1 31"  stroke-width="2"/></svg></div>
+            </div>
+        </div>
+        <div class="swiper partners-slider">
+            <div class="swiper-wrapper">
+                <div class="partner-slide swiper-slide">
+                    <img src="./images/stuff/section3.png">
+                    <div class="partner-slide__name">Договоры, техдокументация</div>
+                </div>
+                <div class="partner-slide swiper-slide">
+                    <img src="./images/stuff/section4.png">
+                    <div class="partner-slide__name">Локализация сервисов</div>
+                </div>
+                <div class="swiper-slide partner-slide">
+                    <img src="./images/stuff/section5.png">
+                    <div class="partner-slide__name">Перевод сайта</div>
+                </div>
+                <div class="swiper-slide partner-slide">
+                    <img src="./images/stuff/section6.png">
+                    <div class="partner-slide__name">Рекламные тексты</div>
+                </div>
+                <div class="partner-slide swiper-slide">
+                    <img src="./images/stuff/section3.png">
+                    <div class="partner-slide__name">Договоры, техдокументация</div>
+                </div>
+                <div class="partner-slide swiper-slide">
+                    <img src="./images/stuff/section4.png">
+                    <div class="partner-slide__name">Локализация сервисов</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="section section--projects">
+    <div class="container">
+        <div class="section--projects__title section__title">
+            Наши проекты
+        </div>
+
+
+        <div class="project-list swiper">
+            <div class="swiper-wrapper swiper-wrapper--xs">
+
+
+                <div class="row project-item swiper-slide">
+                    <div class="col-12 col-sm-6 project-item__preview">
+                        <div class="project-item__cover">
+                            <img src="./images/stuff/section7.png">
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-6 project-item__body">
+                        <div class="project-item__title"><a href="#">Перевод сайта для ТРЦ Галерея</a></div>
+                        <div class="project-item__text">
+                            Сайт содержит страницы не менее чем 300 магазинов самых разных сфер - бутики одежды, кофейни, кафе. Перевод выполнялся на английский и китайский языки (носители).
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row project-item swiper-slide">
+                    <div class="col-12 col-sm-6 project-item__preview">
+                        <div class="project-item__cover">
+                            <img src="./images/stuff/section8.png">
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-6 project-item__body">
+                        <div class="project-item__title"><a href="#">Перевод СНиПов на строительство</a></div>
+                        <div class="project-item__text">
+                            Перевод с русского на китайский (3500 страниц). Над переводом работала группа переводчиков - носителей китайского языка в контакте с нашими редакторами.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <a href="#" class="more-link more-link--primary">Смотреть больше проектов</a>
+
+    </div>
+</div>
+
+
+
+
+
+<footer class="footer">
+	<div class="container">
+		<div class="row">
+			<div class="col-12 col-lg-6">
+				<div class="row">
+					<div class="col-12 col-sm-6 col-lg-12">
+						<div class="footer__logo">
+							<a href="/"><img src="./images/logo-footer.svg"> </a>
+						</div>
+					</div>
+					<div class="col-12 col-sm-6 col-lg-12">
+						<div class="footer__links">
+							<div><a href="tel:88006004074">8-800-600-40-74</a></div>
+							<div><a href="tel:+79787401450">+7(978)740 14 50</a></div>
+						</div>
+					</div>
+				</div>
+
+
+			</div>
+			<div class="col-12 col-lg-6" style="align-self: end">
+				<div class="footer__contacts">
+					В России: г. Симферополь, ул. Бела-Куна, 33<br>
+					В Китае: 中国深圳市南市区南山商业文化中心海印长城13栋1504室<br>
+					<br>
+					ИНН: 010302394862<br>
+					ОГРН 315910200306212
+				</div>
+			</div>
+		</div>
+	</div>
+</footer>
+
+
+<script type="text/javascript" charset="utf-8" src="jquery.min.js"></script>
+<script type="text/javascript" charset="utf-8" src="vue.min.js"></script>
+<script src="common.js"></script>
+</body>
+</html> 
+

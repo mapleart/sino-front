@@ -1,0 +1,58 @@
+.footer {
+	 padding-bottom: 97px;
+
+	&__logo {
+		margin-bottom: 26px;
+
+		@include media('<sm') {
+			max-width: 180px;
+			margin-bottom: 20px;
+		}
+		@include media('>=sm', '<lg') {
+			max-width: 180px;
+			margin-bottom: 32px;
+		}
+	}
+	&__links {
+		@include media('<sm') {
+			margin-bottom: 20px;
+		}
+	}
+	&__links div {
+		margin-bottom: 7px;
+		font-size: 16px;
+		line-height: 18px;
+		a {
+			text-transform: uppercase;
+			color: $secondaryColor;
+			text-decoration: none;
+
+			&:hover {
+				color: #fff;
+			}
+		}
+		@include media('<sm') {
+			margin-bottom: 5px;
+				font-size: 12px;
+			line-height: 14px;
+
+		}
+	}
+	&__links div:last-child {
+		margin-bottom: 0;
+	}
+	&__contacts {
+		font-weight: 400;
+		font-size: 14px;
+		line-height: 130%;
+		color: #FFFFFF;
+	}
+
+
+	@include media('<sm') {
+		padding-bottom: 27px;
+	}
+	@include media('>=sm', '<lg') {
+		padding-bottom: 50px;
+	}
+}

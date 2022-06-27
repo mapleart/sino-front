@@ -1,0 +1,25 @@
+.tab {
+	$self: &;
+
+	&__buttons {
+
+	}
+
+	&__button {
+
+	}
+
+	@keyframes tab_fade {
+		from { opacity: 0; }
+		to { opacity: 1; }
+	}
+
+	&__block {
+		display: none;
+		animation: tab_fade 0.4s linear;
+
+		&.active {
+			display: block;
+		}
+	}
+}

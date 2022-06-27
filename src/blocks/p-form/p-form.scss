@@ -1,0 +1,29 @@
+.price-form {
+  background: #FFFFFF;
+  box-shadow: 1px 1px 20px rgba(5, 15, 50, 0.3);
+  border-radius: 15px;
+  padding: 34px;
+
+  &__body {
+    max-width: 426px;
+    margin: 0 auto;
+  }
+  &__title {
+    font-weight: 500;
+    font-size: 24px;
+    text-align: center;
+    color: #355CE0;
+    margin-bottom: 20px;
+  }
+
+  &__desc {
+    font-weight: 400;
+    font-size: 16px;
+    text-align: center;
+    max-width: 305px;
+    margin: 0 auto 20px;
+  }
+  @include media("<sm") {
+    margin-bottom: 60px;
+  }
+}

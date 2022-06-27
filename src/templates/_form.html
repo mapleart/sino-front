@@ -1,0 +1,56 @@
+<div class="m-form">
+    <div class="m-form__body">
+        <div class="m-form__title">Рассчитать стоимость перевода</div>
+        <div class="m-form__desc">Мы свяжемся с вами в течение 5 минут, уточним сроки и стоимость</div>
+        <form>
+
+            <div class="m-form__toolbar mb-20">
+
+                <input type="file" name="file" style="display: none" class="js-form-file">
+                <div class="form-uploader js-file-uploader " data-toggle="file" data-target=".js-form-file">
+                    <span>
+                        Прикрепить файл
+                    </span>
+                </div>
+                <div class="d-down">
+                    <a class="d-down__toggle" href="#"  role="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                        <span>Перевод на</span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu--end">
+                        <ul class="d-down__items" aria-labelledby="dropdownMenuButton1">
+                            <li><a class="d-down__item" href="#">Menu 1</a></li>
+                            <li><a class="d-down__item" href="#">Menu 2</a></li>
+                            <li><a class="d-down__item" href="#">Menu 3</a></li>
+                        </ul>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="f-group mb-20">
+                <div class="f-floating mb-3">
+                    <input type="text" class="f-control" id="priceFormName" placeholder="Как к вам обратиться?">
+                    <label for="priceFormName">Как к вам обратиться?</label>
+                </div>
+            </div>
+            <div class="f-group mb-20">
+                <div class="f-floating mb-3">
+                    <input type="text" class="f-control" id="priceFormContact" placeholder="E-mail или телефон">
+                    <label for="priceFormContact">E-mail или телефон</label>
+                </div>
+            </div>
+
+            <div class="text-center mb-20">
+                <button type="submit" class="button">Заказать перевод</button>
+            </div>
+
+            <div class="f-check">
+                <input class="f-check-input" type="checkbox" value="" id="priceFormLicense">
+                <label class="f-check-label" for="priceFormLicense">
+                    Согласен с <a href="#">политикой конфиденциальности</a>
+                </label>
+            </div>
+
+        </form>
+    </div>
+</div>
